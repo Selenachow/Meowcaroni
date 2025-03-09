@@ -1,0 +1,6 @@
+/* content.css */
+#pet {
+    position: fixed;
+    z-index: 99999;
+    width: 40px;  /* adjust size as needed */
+  }

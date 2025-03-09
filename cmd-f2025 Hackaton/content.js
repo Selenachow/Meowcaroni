@@ -6,10 +6,12 @@ let meowVolume = 0.3; // Start at 20% volume
 const maxVolume = 1.0;
 const inactivityDuration = 10000; // 10 seconds
 const socialMediaSites = ["reddit.com", "facebook.com", "instagram.com"];
+const studySites = ["docs.google.com", "canvas.ubc.ca"];
 const meowSound = new Audio(chrome.runtime.getURL("meow.mp3"));
 meowSound.loop = true; // Loop the meow sound
 let closingTab = false; // Prevents cat movement glitches during tab closing
 let isBannedSite = false; // Tracks if the site is banned
+let isStudySite = false;
 
 // Ensure audio is loaded before playing
 meowSound.oncanplaythrough = () => console.log("🐱 Meow sound loaded!");
@@ -56,6 +58,8 @@ function changeTextBox() {
             "😼 Distractions ahead!",
             "⏳ Time to close this!"
         ];
+    } else  if (studySites.some(site => window.location.href.includes(site))) {
+        phrases = ["😺 Hello there!", "🐾 You're doing great!", "🚀 Believe in yourself!!"];
     } else {
         // For regular sites, start with friendly messages
         phrases = [
